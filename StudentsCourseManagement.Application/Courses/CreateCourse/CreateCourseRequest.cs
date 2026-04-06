@@ -2,4 +2,4 @@
 
 namespace StudentsCourseManagement.Application.Courses.CreateCourse;
 
-public record CreateCourseRequest(string Title, CourseLevel Level, string? Description);
+public record CreateCourseRequest(string Title, string Level, string? Description);
