@@ -12,7 +12,7 @@ public class Student
     
     public string Email { get; private set; }
 
-    private readonly List<Course> _courses = new();
+    private readonly List<Course> _courses = [];
     public IReadOnlyCollection<Course> Courses => _courses.AsReadOnly();
     
     public Student(string firstName, string lastName, string email)

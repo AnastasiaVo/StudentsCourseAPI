@@ -9,13 +9,11 @@ public class GetStudentHandler(IStudentRepository studentRepository)
         GetStudentRequest request,
         CancellationToken cancellationToken = default)
     {
-        // 1. Load student
         var student = await studentRepository.GetByIdAsync(request.Id);
 
         if (student is null)
             throw new NotFoundException("Student", request.Id);
 
-        // 2. Map courses
         var courses = student.Courses
             .Select(c => new CourseDto(
                 c.Id,
@@ -23,7 +21,6 @@ public class GetStudentHandler(IStudentRepository studentRepository)
                 c.Level.ToString()))
             .ToList();
 
-        // 3. Map student → response
         return new GetStudentResponse(
             student.Id,
             student.FirstName,

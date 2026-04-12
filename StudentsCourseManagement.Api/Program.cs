@@ -5,12 +5,10 @@ using DependencyInjection = StudentsCourseManagement.Application.DependencyInjec
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("Default")!);
-
+builder.Services.AddInfrastructure(builder.Configuration);
 DependencyInjection.AddApplication(builder.Services);
 
 var app = builder.Build();
@@ -20,6 +18,8 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapEndpoints();
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StudentsCourseManagement.Application.Auth.Login;
+using StudentsCourseManagement.Application.Auth.Register;
 using StudentsCourseManagement.Application.Courses.CreateCourse;
 using StudentsCourseManagement.Application.Courses.GetAllCourses;
 using StudentsCourseManagement.Application.Courses.GetCourse;
@@ -15,12 +17,17 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
+        // Auth handlers
+        services.AddScoped<RegisterHandler>();
+        services.AddScoped<LoginHandler>();
+
         // Student handlers
         services.AddScoped<CreateStudentHandler>();
         services.AddScoped<GetStudentHandler>();
         services.AddScoped<GetAllStudentsHandler>();
         services.AddScoped<UpdateStudentHandler>();
-        //services.AddScoped<DeleteStudentHandler>();
+        
+        // services.AddScoped<DeleteStudentHandler>();
         services.AddScoped<EnrollStudentHandler>();
         services.AddScoped<UnenrollStudentHandler>();
 
